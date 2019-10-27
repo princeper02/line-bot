@@ -1,4 +1,4 @@
-import { Client, middleware } from '@line/bot-sdk'
+const { Client, middleware } = require('@line/bot-sdk')
 const port = process.env.PORT || 5000
 const config = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
@@ -7,8 +7,7 @@ const config = {
 const lineClient = new Client(config)
 const lineMiddleware = middleware(config)
 
-export default {
-  app,
+module.exports = {
   port,
   lineClient,
   lineMiddleware

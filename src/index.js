@@ -1,5 +1,9 @@
-import express from 'express'
-import { app, lineMiddleware } from './const/config.const' 
+const dotenv = require('dotenv')
+dotenv.config()
+
+const express = require('express')
+const { handleEvent } = require('./event-handler/handle-event')
+const { lineMiddleware, port } = require('./const/config.const')
 const app = express()
 
 app.get('/', (req, res) => {
@@ -13,7 +17,8 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', lineMiddleware , (req, res) => {
   console.log('/webhook')
-  res.end()
+  Promise.all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
 })
 
 app.listen(port, () => {
