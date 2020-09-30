@@ -9,7 +9,7 @@ const app = express()
 app.get('/', (req, res) => {
   res.send({
     status: 200,
-    message: 'Hello Line bot API.',
+    message: 'Hello Line bot API. meow :3',
     server_time: new Date()
   })
 })
